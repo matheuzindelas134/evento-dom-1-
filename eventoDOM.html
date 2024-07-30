@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades de Comprimento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input, select, button {
+            margin: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversor de Unidades de Comprimento</h1>
+
+    <label for="metros">Distância em Metros:</label>
+    <input type="number" id="metros" step="0.01" placeholder="Digite a distância em metros">
+    <br>
+    <label for="unidade">Converter para:</label>
+    <select id="unidade">
+        <option value="jardas">Jarda</option>
+        <option value="pes">Pé</option>
+        <option value="polegadas">Polegada</option>
+        <option value="milhas">Milha</option>
+    </select>
+    <br>
+    <button onclick="converter()">Converter</button>
+    <div id="resultado"></div>
+
+    <script>
+        const converter = () => {
+            
+            const metros = parseFloat(document.getElementById('metros').value);
+            const unidade = document.getElementById('unidade').value;
+
+            
+            if (isNaN(metros) || metros <= 0) {
+                document.getElementById('resultado').innerText = 'Por favor, insira um valor válido para metros.';
+                return;
+            }
+
+            
+            const conversoes = {
+                jardas: metros * 1.09361,
+                pes: metros * 3.28084,
+                polegadas: metros * 39.3701,
+                milhas: metros * 0.000621371
+            };
+
+            
+            const resultado = conversoes[unidade];
+
+           
+            document.getElementById('resultado').innerText = 
+                `A distância de ${metros} metros é equivalente a ${resultado.toFixed(2)} ${unidade}.`;
+        };
+    </script>
+</body>
+</html>
